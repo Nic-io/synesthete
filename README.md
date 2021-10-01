@@ -1,2 +1,4 @@
-# synesthete
-listen to your eyes
+# Synesthete
+## Listen to your eyes
+
+A Zephyr RTOS project
