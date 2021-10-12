@@ -54,3 +54,5 @@ dkms.conf
 #weird VScode binary
 core
 .devcontainer
+.vscode
+build
