@@ -146,7 +146,7 @@ void main(void)
 
 	
 	buf = k_malloc(buf_size);
-
+	
 	if (buf == NULL) {
 		LOG_ERR("Could not allocate memory. Aborting sample.");
 		RETURN_FROM_MAIN(1);
@@ -154,40 +154,58 @@ void main(void)
 
 	display_blanking_off(display_dev);
 
-
 	buf_desc.buf_size = buf_size;
 	buf_desc.pitch = capabilities.x_resolution;
 	buf_desc.width = capabilities.x_resolution;
 	buf_desc.height = bufthickness;
 
-	char input;
-	int colorcode;
-	void * memptr = 0x20000000;
+	void * memestart = 0x20000000;
+	void * memptr = memestart;
 	(void)memset(buf, 0xFF, buf_size);
 
 	for(int k=0; k<240; k++){
 		display_write(display_dev, 0, k, &buf_desc, buf);
 	}
 	
-	while (1) {
-		
-		//input = console_getchar();
+	while (1) {		
 
-
-		
 		for(int k=0; k<240; k+=3){
 			
-			for (size_t idx = 0; idx < buf_size; idx += 3) {
-				*(buf + idx + 0) = *(uint32_t*)(memptr + idx);
-				*(buf + idx + 1) = *(uint32_t*)(memptr + idx) >> 8;
-				*(buf + idx + 2) = *(uint32_t*)(memptr + idx) >> 16;
+			for (size_t idx = 0; idx < buf_size; idx += 9) {
+
+			  /**(buf + idx + 0) = *(uint32_t*)(memptr + meminc);
+				*(buf + idx + 1) = *(uint32_t*)(memptr + meminc);
+				*(buf + idx + 2) = *(uint32_t*)(memptr + meminc);
+ 
+				*(buf + idx + 3) = *(uint32_t*)(memptr + meminc) >> 8;
+				*(buf + idx + 4) = *(uint32_t*)(memptr + meminc) >> 8;
+				*(buf + idx + 5) = *(uint32_t*)(memptr + meminc) >> 8;
+				 
+				*(buf + idx + 6) = *(uint32_t*)(memptr + meminc) >> 16;
+				*(buf + idx + 7) = *(uint32_t*)(memptr + meminc) >> 16;
+				*(buf + idx + 8) = *(uint32_t*)(memptr + meminc) >> 16; */
+
+				*(buf + idx + 0) = *(uint32_t*)(memptr);
+				*(buf + idx + 1) = *(uint32_t*)(memptr) >> 8;
+				*(buf + idx + 2) = *(uint32_t*)(memptr) >> 16;
+
+				*(buf + idx + 3) = *(uint32_t*)(memptr);
+				*(buf + idx + 4) = *(uint32_t*)(memptr) >> 8;
+				*(buf + idx + 5) = *(uint32_t*)(memptr) >> 16;
+				
+				*(buf + idx + 6) = *(uint32_t*)(memptr);
+				*(buf + idx + 7) = *(uint32_t*)(memptr) >> 8;
+				*(buf + idx + 8) = *(uint32_t*)(memptr) >> 16;
+				memptr++;
 			}
+
 			for(int j=0; j<3; j++){
 				display_write(display_dev, 0, k+j, &buf_desc, buf);
 			}
-			memptr+=buf_size;
-		}						
-		memptr = 0x20000000;
+		}
+		printk("showing memory from %p to %p \n", memestart, memptr);
+		memptr = memestart;
+
 #if CONFIG_TEST
 		if (grey_count >= 1024) {
 			break;
