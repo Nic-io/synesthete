@@ -6,4 +6,12 @@ project(synesthete)
 
 # Add your source file to the "app" target. This must come after
 # find_package(Zephyr) which defines the target.
-target_sources(app PRIVATE src/main.c)
+target_include_directories(app 
+    PRIVATE
+        src/gui)
+        
+target_sources(app 
+    PRIVATE
+        src/main.c
+        src/gui/gui.c
+        src/gui/gui.h)
