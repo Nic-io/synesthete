@@ -11,11 +11,10 @@
 #include <device.h>
 #include <drivers/display.h>
 #include <console/console.h>
-#include <sys/printk.h>
 
 #define DISPLAY_DEV_NAME DT_LABEL(DT_INST(0, ilitek_ili9340))
 
 int gui_init();
-void gui_draw_wave();
+void gui_draw_wave(int32_t *wave_array);
 
 #endif

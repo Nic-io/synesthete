@@ -8,10 +8,19 @@ project(synesthete)
 # find_package(Zephyr) which defines the target.
 target_include_directories(app 
     PRIVATE
-        src/gui)
+        src/gui
+        src/ux/touch
+        src/ux/touch/touch_gpio
+        src/ux/touch/touch_adc)
         
 target_sources(app 
     PRIVATE
         src/main.c
         src/gui/gui.c
-        src/gui/gui.h)
+        src/gui/gui.h
+        src/ux/touch/touch.c
+        src/ux/touch/touch.h
+        src/ux/touch/touch_gpio/touch_gpio.c
+        src/ux/touch/touch_gpio/touch_gpio.h
+        src/ux/touch/touch_adc/touch_adc.c
+        src/ux/touch/touch_adc/touch_adc.h)

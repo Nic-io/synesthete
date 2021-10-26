@@ -10,8 +10,53 @@
 		io-channels = <&adc1 0>;
 	};
 
+	touchpins {
+		compatible = "gpio-leds";
+		xpos {
+			gpios = <&gpioa 1 GPIO_ACTIVE_HIGH>;
+			label = "touch screen X+ pin";
+		};
+		xgnd {
+			gpios = <&gpioc 0 GPIO_ACTIVE_HIGH>;
+			label = "touch screen X- pin";
+		};
+		ypos {
+			gpios = <&gpioa 0 GPIO_ACTIVE_HIGH>;
+			label = "touch screen Y+ pin";
+		};
+		ygnd {
+			gpios = <&gpioc 1 GPIO_ACTIVE_HIGH>;
+			label = "touch screen Y- pin";
+		};
+	};
 };
 
+
 &adc1 {
-    status = "okay";
+	status = "okay";
+	pinctrl-0 = <&adc1_in1_pa1 &adc1_in0_pa0>;
 };
+
+&pll {
+	div-m = <8>;
+	mul-n = <360>;
+	div-p = <2>;
+	div-q = <2>;
+	clocks = <&clk_hse>;
+	status = "okay";
+};
+
+&rcc {
+	clocks = <&pll>;
+	clock-frequency = <DT_FREQ_M(96)>;
+	ahb-prescaler = <1>;
+	apb1-prescaler = <4>;
+	apb2-prescaler = <4>;
+};
+
+&arduino_spi {
+	ili9340@0 {
+		spi-max-frequency = <450000000>;
+	};
+};
+
