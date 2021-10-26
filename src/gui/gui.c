@@ -10,7 +10,8 @@ static const struct device *display_dev;
 static struct display_buffer_descriptor buf_desc;
 static struct display_capabilities capabilities;
 static uint8_t *buf;
-static int inited =0;
+
+
 LOG_MODULE_REGISTER(synesthete, LOG_LEVEL_INF);
 
 int gui_init(void)
@@ -51,6 +52,7 @@ int gui_init(void)
 	return 0;
 }
 void init_circle(uint32_t *color){
+	static int inited =0;
 	if(inited == 0){
 		for (size_t idx = 0; idx < buf_desc.buf_size; idx += 3) {
 			*(buf + idx + 0) =*(uint32_t*)color >> 16;
@@ -60,8 +62,6 @@ void init_circle(uint32_t *color){
 		//inited = 1;
 	}
 }
-
-
 
 void gui_draw_point(int x, int y){
 
