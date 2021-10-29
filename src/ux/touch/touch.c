@@ -27,8 +27,8 @@ void touch_read(void){
     touch_gpioSet(yneg, 0);
     xval = touchADC_get(x);
 
-    pressedPos.x=340-(xval-500)/10.5;
-    pressedPos.y=(yval-680)/12.4;
+    pressedPos.x=320-(xval-500)/9.5f;
+    pressedPos.y=(yval-680)/12.4f;
     
     if(pressedPos.y < 0){
         pressedPos.y = 0;
@@ -39,8 +39,8 @@ void touch_read(void){
     if(pressedPos.x < 0){
         pressedPos.x = 0;
     }
-    if(pressedPos.x >340){
-        pressedPos.x = 340;
+    if(pressedPos.x >320){
+        pressedPos.x = 320;
     }
 }
 

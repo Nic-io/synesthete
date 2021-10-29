@@ -9,7 +9,7 @@
 #include "touch_adc.h"
 #include "touch_gpio.h"
 
-typedef struct{
+typedef struct xyPos{
     int x;
     int y;
 }xyPos;

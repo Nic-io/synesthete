@@ -11,13 +11,16 @@ target_include_directories(app
         src/gui
         src/ux/touch
         src/ux/touch/touch_gpio
-        src/ux/touch/touch_adc)
+        src/ux/touch/touch_adc
+        src/wavetab)
         
 target_sources(app 
     PRIVATE
         src/main.c
         src/gui/gui.c
         src/gui/gui.h
+        src/wavetab/wavetab.c
+        src/wavetab/wavetab.h
         src/ux/touch/touch.c
         src/ux/touch/touch.h
         src/ux/touch/touch_gpio/touch_gpio.c
