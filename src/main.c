@@ -47,7 +47,7 @@ void update_table(void *p1, void *p2, void *p3){
 void produceSound(void *p1, void *p2, void *p3){
 	while (1){
 		sound();
-		k_sleep(K_USEC(50));
+		k_sleep(K_USEC(10));
 	}
 }
 

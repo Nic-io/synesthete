@@ -8,10 +8,11 @@
 #include <drivers/dac.h>
 
 #include "wavetab.h"
+#include "dacout.h"
 
 LOG_MODULE_REGISTER(wavetab, LOG_LEVEL_INF);
 
-static uint16_t aquisition_table[TABLE_RESOLUTION];
+static uint32_t aquisition_table[TABLE_RESOLUTION];
 static int updated_samples[TABLE_RESOLUTION];
 
 void wave_aquire(void){
@@ -69,29 +70,11 @@ void sound_init(void)
 		printk("Setting up of DAC channel failed with code %d\n", ret);
 		return;
 	}
+	//dacout_init(aquisition_table, TABLE_RESOLUTION);
 }
 
 void sound(void){
-
-	/* Number of valid DAC values, e.g. 4096 for 12-bit DAC */
-	const int dac_values = 1U << DAC_RESOLUTION;
-	/*
-	 * 1 msec sleep leads to about 4 sec signal period for 12-bit
-	 * DACs. For DACs with lower resolution, sleep time needs to
-	 * be increased.
-	 * Make sure to sleep at least 1 msec even for future 16-bit
-	 * DACs (lowering signal frequency).
-	 */
-	const int sleep_time = 4096 / dac_values > 0 ?
-		4096 / dac_values : 1;
-	for (int i = TABLE_RESOLUTION; i > 0; i--) {
-		int ret = dac_write_value(dac_dev, DAC_CHANNEL_ID, (aquisition_table[i-1]*4096/240));
-		if (ret != 0) {
-			printk("dac_write_value() failed with code %d\n", ret);
-			return;
-		}
-		k_sleep(K_USEC(50));
-	}
+	
 }
 
  

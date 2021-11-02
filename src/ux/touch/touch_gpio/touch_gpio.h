@@ -21,6 +21,6 @@ typedef enum {
 
 int gpios_init(void);
 int touch_gpioSet(touchPin hPin, int value);
-
+void touch_gpioDisable(touchPin tPin);
 
 #endif

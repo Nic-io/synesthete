@@ -42,9 +42,7 @@ struct adc_sequence sequence = {
 const struct device *dev_adc;
 int32_t adc_vref;
 
-void adc_init(void)
-{
-	int err;
+void adc_init(void){
 	dev_adc = DEVICE_DT_GET(ADC_NODE);
 
 	if (!device_is_ready(dev_adc)) {

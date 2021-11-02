@@ -12,7 +12,8 @@ target_include_directories(app
         src/ux/touch
         src/ux/touch/touch_gpio
         src/ux/touch/touch_adc
-        src/wavetab)
+        src/wavetab
+        src/dacout)
         
 target_sources(app 
     PRIVATE
@@ -21,6 +22,8 @@ target_sources(app
         src/gui/gui.h
         src/wavetab/wavetab.c
         src/wavetab/wavetab.h
+        src/dacout/dacout.c
+        src/dacout/dacout.h
         src/ux/touch/touch.c
         src/ux/touch/touch.h
         src/ux/touch/touch_gpio/touch_gpio.c

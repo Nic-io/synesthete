@@ -16,6 +16,7 @@
 
 void wave_aquire(void);
 void wave_draw(void);
-
+void sound_init(void);
+void sound(void);
 
 #endif

@@ -14,8 +14,6 @@
 		dac-resolution = <12>;
 	};
 	
-
-
 	touchpins {
 		compatible = "gpio-leds";
 		xpos {
@@ -37,13 +35,22 @@
 	};
 };
 
-
 &adc1 {
 	status = "okay";
 	pinctrl-0 = <&adc1_in1_pa1 &adc1_in0_pa0>;
 };
 
 &dac1{
+	status = "okay";
+	dmas = <&dma1 5 7 0x32C40 0x03>;
+	dma-names = "dacout";
+};
+
+&timers2{
+	status = "okay";
+};
+
+&dma1{
 	status = "okay";
 };
 

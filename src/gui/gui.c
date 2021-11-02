@@ -48,8 +48,6 @@ int gui_init(void)
     	/* mutex successfully locked */
 		(void)memset(buf, 0x00, buf_size);
 		k_mutex_unlock(&buf_mutex);
-	} else {
-		printf("Cannot lock XYZ display\n");
 	}
 	
 	if (k_mutex_lock(&buf_mutex, K_MSEC(100)) == 0) {
@@ -58,12 +56,8 @@ int gui_init(void)
 			display_write(display_dev, 0, k, &buf_desc, buf);
 		}
 		k_mutex_unlock(&buf_mutex);
-	} else {
-		printf("Cannot lock XYZ display\n");
 	}
-
-
-	
+		
 	return 0;
 }
 

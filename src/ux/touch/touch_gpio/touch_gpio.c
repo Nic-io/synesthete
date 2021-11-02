@@ -84,7 +84,7 @@ int touch_gpioSet(touchPin hPin, int value){
     return ret;
 }
 
-int touch_gpioDisable(touchPin tPin){
+void touch_gpioDisable(touchPin tPin){
     switch (tPin){
         case xpos :
             gpio_pin_configure(devXpos, PIN_X_P, GPIO_DISCONNECTED);
