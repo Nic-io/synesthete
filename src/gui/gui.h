@@ -16,6 +16,6 @@
 
 int gui_init();
 void gui_draw_wave(int32_t *wave_array);
-void gui_draw_column(uint16_t *table, int *newflag, int size);
+void gui_draw_column(uint32_t *table, int *newflag, int size);
 
 #endif

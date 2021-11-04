@@ -13,15 +13,24 @@ static TIM_HandleTypeDef htim2;
 const struct device *dacdma;
 
 
-struct dma_block_config dacdmablk_cfg = {
+
+void * dmadaccall(const struct device *dev, void *user_data, uint32_t channel, int status){
+    if (status == 0){
+      //  LOG_INF("DMACALLBK all good");
+    }else{
+        LOG_ERR("DMACallBK Error");
+    }
+}
+
+static struct dma_block_config dacdmablk_cfg = {
     .source_addr_adj = DMA_ADDR_ADJ_INCREMENT, 
-    .dest_address = 0x40007408,//DT_REG_ADDR(DT_NODELABEL(dac1)),
+    .dest_address = 0x40007408,//  DT_REG_ADDR(DT_NODELABEL(dac1)),//
     .source_reload_en = 1,
     .dest_reload_en = 1,
     .dest_addr_adj = DMA_ADDR_ADJ_NO_CHANGE
 };
 
-struct dma_config dacdma_cfg = {
+static struct dma_config dacdma_cfg = {
     .dma_slot = 7,
     .channel_direction = MEMORY_TO_PERIPHERAL,
     .channel_priority = 1, 
@@ -31,24 +40,27 @@ struct dma_config dacdma_cfg = {
     .dest_data_size = 2,
     .source_burst_length =1,
     .dest_burst_length =1,
-    .head_block = &dacdmablk_cfg
+    .head_block = &dacdmablk_cfg,
+    .complete_callback_en = 0,
+    .error_callback_en = 1,
+    .dma_callback = dmadaccall
 };
 
 int dacout_init(uint32_t *buffer, uint16_t size){
     
+    MX_TIM2_Init();
+    HAL_TIM_Base_Start(&htim2);
+
     int ret = 0;
     
     dacdma = DEVICE_DT_GET(DACOUT);
     dacdmablk_cfg.source_address = buffer;
-    dacdmablk_cfg.block_size = size;
+    dacdmablk_cfg.block_size = size*2;
     
     ret = dma_config(dacdma, 5, &dacdma_cfg);
     if(ret != 0){
         LOG_ERR("DMA Config Error");
     } 
-
-    MX_TIM2_Init();
-    HAL_TIM_Base_Start(&htim2);
 
     ret = dma_start(dacdma, 5);
     if(ret != 0){
@@ -74,7 +86,7 @@ static void MX_TIM2_Init(void)
     htim2.Instance = TIM2;
     htim2.Init.Prescaler = 84-1;
     htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim2.Init.Period = 1000-1;
+    htim2.Init.Period = 2-1;
     htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
     if (HAL_TIM_Base_Init(&htim2) != HAL_OK)

@@ -42,7 +42,7 @@
 
 &dac1{
 	status = "okay";
-	dmas = <&dma1 5 7 0x32C40 0x03>;
+	dmas = <&dma1 5 7 0 0x03>;// 5 7 0x32C40 0x03>;
 	dma-names = "dacout";
 };
 

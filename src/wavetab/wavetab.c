@@ -12,8 +12,9 @@
 
 LOG_MODULE_REGISTER(wavetab, LOG_LEVEL_INF);
 
-static uint16_t aquisition_table[TABLE_RESOLUTION]={2000};
-static int updated_samples[TABLE_RESOLUTION];
+static uint32_t aquisition_table[TABLE_RESOLUTION]={0};
+static uint32_t sound_table[TABLE_RESOLUTION]={0};
+static int updated_samples[TABLE_RESOLUTION] = {0} ;
 
 void wave_aquire(void){
    
@@ -21,12 +22,12 @@ void wave_aquire(void){
         int place;
         k_msleep(5);
         place = (touch_get().x/TABLE_STEPSIZE);
-        if(place< TABLE_RESOLUTION){
-                
-            LOG_INF("Tab[%d]: %d", place, touch_get().y);
+        if(place < TABLE_RESOLUTION && updated_samples[place] == 0){
             
+            LOG_INF("Tab[%d]: %d", place, touch_get().y);
             aquisition_table[place] = touch_get().y;
             updated_samples[place] = 1;
+			sound_table[place]= (touch_get().y)*17;
         }
     }
 }
@@ -59,6 +60,7 @@ static const struct dac_channel_cfg dac_ch_cfg = {
 
 void sound_init(void)
 {
+	dacout_init(sound_table, TABLE_RESOLUTION);
 	if (!device_is_ready(dac_dev)) {
 		printk("DAC device %s is not ready\n", dac_dev->name);
 		return;
@@ -70,7 +72,7 @@ void sound_init(void)
 		printk("Setting up of DAC channel failed with code %d\n", ret);
 		return;
 	}
-	dacout_init(aquisition_table, TABLE_RESOLUTION);
+	
 }
 
 void sound(void){

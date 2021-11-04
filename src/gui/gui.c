@@ -69,7 +69,7 @@ void fill_buffer(uint32_t *color){
 	}
 }
 
-void gui_draw_column(uint16_t *table, int *newflag, int size){
+void gui_draw_column(uint32_t *table, int *newflag, int size){
 
 	for (size_t i = 0; i < size; i++)
 	{
