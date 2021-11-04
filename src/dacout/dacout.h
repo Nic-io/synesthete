@@ -12,5 +12,9 @@
 #include <logging/log.h>
 #include <drivers/dma.h>
 #include <drivers/dac.h>
+#include <soc.h>
 
+
+int dacout_init(uint32_t *buffer, uint16_t size);
+static void MX_TIM2_Init(void);
 #endif

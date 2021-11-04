@@ -12,7 +12,7 @@
 
 LOG_MODULE_REGISTER(wavetab, LOG_LEVEL_INF);
 
-static uint32_t aquisition_table[TABLE_RESOLUTION];
+static uint16_t aquisition_table[TABLE_RESOLUTION]={2000};
 static int updated_samples[TABLE_RESOLUTION];
 
 void wave_aquire(void){
@@ -21,7 +21,7 @@ void wave_aquire(void){
         int place;
         k_msleep(5);
         place = (touch_get().x/TABLE_STEPSIZE);
-        if(place<= TABLE_RESOLUTION){
+        if(place< TABLE_RESOLUTION){
                 
             LOG_INF("Tab[%d]: %d", place, touch_get().y);
             
@@ -70,7 +70,7 @@ void sound_init(void)
 		printk("Setting up of DAC channel failed with code %d\n", ret);
 		return;
 	}
-	//dacout_init(aquisition_table, TABLE_RESOLUTION);
+	dacout_init(aquisition_table, TABLE_RESOLUTION);
 }
 
 void sound(void){

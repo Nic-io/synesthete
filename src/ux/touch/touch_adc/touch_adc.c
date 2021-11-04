@@ -21,7 +21,7 @@
 
 static int16_t sample_buffer;
 
-struct adc_channel_cfg channel_cfg = {
+static struct adc_channel_cfg channel_cfg = {
 	.gain = ADC_GAIN,
 	.reference = ADC_REFERENCE,
 	.acquisition_time = ADC_ACQUISITION_TIME,
@@ -30,7 +30,7 @@ struct adc_channel_cfg channel_cfg = {
 	.differential = 0
 };
 
-struct adc_sequence sequence = {
+static struct adc_sequence sequence = {
 	/* individual channels will be added below */
 	.channels    = 0,
 	.buffer      = &sample_buffer,
@@ -39,7 +39,7 @@ struct adc_sequence sequence = {
 	.resolution  = ADC_RESOLUTION,
 };
 
-const struct device *dev_adc;
+static const struct device *dev_adc;
 int32_t adc_vref;
 
 void adc_init(void){
