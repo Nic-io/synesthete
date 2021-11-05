@@ -6,8 +6,8 @@
 #ifndef __SYNESTHETE_TOUCH_H_
 #define __SYNESTHETE_TOUCH_H_
 
-#include "touch_adc.h"
-#include "touch_gpio.h"
+#include "adc.h"
+#include "gpio.h"
 
 typedef struct xyPos{
     int x;

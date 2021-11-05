@@ -4,15 +4,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include "touch_adc.h"
+#include "adc.h"
+
+LOG_MODULE_REGISTER(Synesthete_ADC, LOG_LEVEL_INF);
 
 #if !DT_NODE_EXISTS(DT_PATH(zephyr_user)) || \
 	!DT_NODE_HAS_PROP(DT_PATH(zephyr_user), io_channels)
 #error "No suitable devicetree overlay specified"
 #endif
-
 #define ADC_NODE		DT_PHANDLE(DT_PATH(zephyr_user), io_channels)
-
 /* Common settings supported by most ADCs */
 #define ADC_RESOLUTION		12
 #define ADC_GAIN		ADC_GAIN_1
@@ -20,6 +20,7 @@
 #define ADC_ACQUISITION_TIME	ADC_ACQ_TIME_DEFAULT
 
 static int16_t sample_buffer;
+static const struct device *dev_adc;
 
 static struct adc_channel_cfg channel_cfg = {
 	.gain = ADC_GAIN,
@@ -39,10 +40,8 @@ static struct adc_sequence sequence = {
 	.resolution  = ADC_RESOLUTION,
 };
 
-static const struct device *dev_adc;
-int32_t adc_vref;
-
 void adc_init(void){
+	int32_t adc_vref;
 	dev_adc = DEVICE_DT_GET(ADC_NODE);
 
 	if (!device_is_ready(dev_adc)) {
@@ -51,9 +50,10 @@ void adc_init(void){
 	}
 	adc_channel_setup(dev_adc, &channel_cfg);
 	adc_vref = adc_ref_internal(dev_adc);
+	LOG_DBG("ADC intenal ref voltage = %d", adc_vref);
 }
 
-int touchADC_get(touchAxis axis){
+int adc_get_touch_axis(touchAxis axis){
 
 	channel_cfg.channel_id = axis;
 	sequence.channels = BIT(axis);
@@ -66,17 +66,5 @@ int touchADC_get(touchAxis axis){
 		printk("ADC reading failed with error %d.\n", err);
 		return err;
 	}
-			
-	int32_t raw_value = sample_buffer;
-	if (adc_vref > 0) {
-		/*
-		* Convert raw reading to millivolts if driver
-		* supports reading of ADC reference voltage
-		*/
-		int32_t mv_value = raw_value;
-		adc_raw_to_millivolts(adc_vref, ADC_GAIN,
-		ADC_RESOLUTION, &mv_value);
-		printk(" = %d mV  ", mv_value);
-	}
-	return raw_value;
+	return sample_buffer;
 }

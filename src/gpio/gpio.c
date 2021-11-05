@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include "touch_gpio.h"
+#include "gpio.h"
 
-//LOG_MODULE_REGISTER(touchgpio, LOG_LEVEL_INF);
+LOG_MODULE_REGISTER(Synesthete_GPIO, LOG_LEVEL_INF);
 
 /* The devicetree node identifier for the pins. */
 #define TOUCHXPOS DT_PATH(touchpins, xpos)
@@ -61,7 +61,7 @@ int gpios_init(void){
     return 0;
 }
 
-int touch_gpioSet(touchPin hPin, int value){
+void gpio_set_touchpin(touchPin hPin, int value){
     int ret=0;
     switch(hPin){
         case xpos :
@@ -81,18 +81,24 @@ int touch_gpioSet(touchPin hPin, int value){
 	        ret = gpio_pin_set(devYneg, PIN_Y_N, value);
             break;
     }
-    return ret;
+    if(ret != 0){
+        LOG_ERR("GPIO set failed ERRNO =%d", ret);
+    }
 }
 
-void touch_gpioDisable(touchPin tPin){
+void gpio_disable_touchpin(touchPin tPin){
+    int ret=0;
     switch (tPin){
         case xpos :
-            gpio_pin_configure(devXpos, PIN_X_P, GPIO_DISCONNECTED);
+            ret = gpio_pin_configure(devXpos, PIN_X_P, GPIO_DISCONNECTED);
         case xneg :
-            gpio_pin_configure(devXneg, PIN_X_N, GPIO_DISCONNECTED);
+            ret = gpio_pin_configure(devXneg, PIN_X_N, GPIO_DISCONNECTED);
         case ypos :
-            gpio_pin_configure(devYpos, PIN_Y_P, GPIO_DISCONNECTED);
+            ret = gpio_pin_configure(devYpos, PIN_Y_P, GPIO_DISCONNECTED);
         case yneg :
-            gpio_pin_configure(devYneg, PIN_Y_N, GPIO_DISCONNECTED);
+            ret = gpio_pin_configure(devYneg, PIN_Y_N, GPIO_DISCONNECTED);
+    }
+     if(ret != 0){
+        LOG_ERR("GPIO set failed ERRNO =%d", ret);
     }
 }

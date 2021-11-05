@@ -10,9 +10,9 @@ target_include_directories(app
     PRIVATE
         src/gui
         src/ux/touch
-        src/ux/touch/touch_gpio
-        src/ux/touch/touch_adc
-        src/wavetab
+        src/adc
+        src/gpio
+        src/synesthete
         src/dacout)
         
 target_sources(app 
@@ -20,13 +20,13 @@ target_sources(app
         src/main.c
         src/gui/gui.c
         src/gui/gui.h
-        src/wavetab/wavetab.c
-        src/wavetab/wavetab.h
+        src/synesthete/synesthete.c
+        src/synesthete/synesthete.h
         src/dacout/dacout.c
         src/dacout/dacout.h
         src/ux/touch/touch.c
         src/ux/touch/touch.h
-        src/ux/touch/touch_gpio/touch_gpio.c
-        src/ux/touch/touch_gpio/touch_gpio.h
-        src/ux/touch/touch_adc/touch_adc.c
-        src/ux/touch/touch_adc/touch_adc.h)
+        src/gpio/gpio.c
+        src/gpio/gpio.h
+        src/adc/adc.c
+        src/adc/adc.h)

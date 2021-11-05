@@ -14,7 +14,8 @@
 #include <drivers/dac.h>
 #include <soc.h>
 
-
 int dacout_init(uint32_t *buffer, uint16_t size);
-static void MX_TIM2_Init(void);
+void dacout_timer_init(void);
+static void * dmadaccall(const struct device *dev, void *user_data, uint32_t channel, int status);
+
 #endif

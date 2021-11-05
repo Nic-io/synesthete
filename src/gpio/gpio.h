@@ -20,7 +20,7 @@ typedef enum {
 }touchPin;
 
 int gpios_init(void);
-int touch_gpioSet(touchPin hPin, int value);
-void touch_gpioDisable(touchPin tPin);
+void gpio_set_touchpin(touchPin hPin, int value);
+void gpio_disable_touchpin(touchPin tPin);
 
 #endif

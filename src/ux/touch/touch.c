@@ -15,17 +15,17 @@ void touch_init(void){
 void touch_read(void){
     int xval, yval;
     
-    touch_gpioDisable(ypos);
-    touch_gpioDisable(yneg);
-    touch_gpioSet(xpos, 1);
-    touch_gpioSet(xneg, 0);
-    yval = touchADC_get(y);
+    gpio_disable_touchpin(ypos);
+    gpio_disable_touchpin(yneg);
+    gpio_set_touchpin(xpos, 1);
+    gpio_set_touchpin(xneg, 0);
+    yval = adc_get_touch_axis(y);
     
-    touch_gpioDisable(xpos);
-    touch_gpioDisable(xneg);
-    touch_gpioSet(ypos, 1);
-    touch_gpioSet(yneg, 0);
-    xval = touchADC_get(x);
+    gpio_disable_touchpin(xpos);
+    gpio_disable_touchpin(xneg);
+    gpio_set_touchpin(ypos, 1);
+    gpio_set_touchpin(yneg, 0);
+    xval = adc_get_touch_axis(x);
 
     pressedPos.x=320-(xval-500)/9.5f;
     pressedPos.y=(yval-680)/12.4f;

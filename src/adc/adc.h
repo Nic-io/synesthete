@@ -18,6 +18,6 @@ typedef enum {
 }touchAxis;
 
 void adc_init(void);
-int touchADC_get(touchAxis axis);
+int adc_get_touch_axis(touchAxis axis);
 
 #endif

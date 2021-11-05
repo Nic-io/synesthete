@@ -8,6 +8,7 @@
 
 #include "touch.h"
 #include "gui.h"
+#include "dacout.h"
 
 #define TABLE_SCREENSIZE 320
 #define TABLE_RESOLUTION 100
@@ -16,7 +17,7 @@
 
 void wave_aquire(void);
 void wave_draw(void);
-void sound_init(void);
+void synesthete_init(void);
 void sound(void);
 
 #endif

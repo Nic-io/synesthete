@@ -14,7 +14,7 @@ static struct display_capabilities capabilities;
 static uint8_t *buf;
 
 
-LOG_MODULE_REGISTER(gui, LOG_LEVEL_INF);
+LOG_MODULE_REGISTER(Synesthete_GUI, LOG_LEVEL_INF);
 
 int gui_init(void)
 {
@@ -30,6 +30,7 @@ int gui_init(void)
 
 	display_get_capabilities(display_dev, &capabilities);
 
+	// The maximum Buffer size is a 320 pixel line in this case
 	buf_size = capabilities.x_resolution*3;
 
 	buf = k_malloc(buf_size);	
