@@ -13,9 +13,11 @@
 #include <drivers/dma.h>
 #include <drivers/dac.h>
 #include <soc.h>
+#include <console/console.h>
 
-int dacout_init(uint32_t *buffer, uint16_t size);
+int dacout_init(uint16_t *buffer, uint16_t size);
 void dacout_timer_init(void);
-static void * dmadaccall(const struct device *dev, void *user_data, uint32_t channel, int status);
+void dacout_change_freq(int freq);
+
 
 #endif

@@ -20,7 +20,7 @@ void touch_read(void){
     gpio_set_touchpin(xpos, 1);
     gpio_set_touchpin(xneg, 0);
     yval = adc_get_touch_axis(y);
-    
+    pressedPos.rawy=yval;
     gpio_disable_touchpin(xpos);
     gpio_disable_touchpin(xneg);
     gpio_set_touchpin(ypos, 1);

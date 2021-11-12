@@ -58,12 +58,12 @@ int adc_get_touch_axis(touchAxis axis){
 	channel_cfg.channel_id = axis;
 	sequence.channels = BIT(axis);
 
-	k_msleep(10);
+	k_sleep(K_USEC(500));
 	adc_channel_setup(dev_adc, &channel_cfg);
 	int err = adc_read(dev_adc, &sequence);
 	
 	if (err != 0) {
-		printk("ADC reading failed with error %d.\n", err);
+		LOG_ERR("ADC reading failed with error %d.\n", err);
 		return err;
 	}
 	return sample_buffer;

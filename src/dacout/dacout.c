@@ -23,6 +23,7 @@ LOG_MODULE_REGISTER(Synesthete_dacout, LOG_LEVEL_INF);
 #error "Unsupported board: see README and check /zephyr,user node"
 #endif
 
+static int tabsize;
 static TIM_HandleTypeDef htim2;
 static const struct device *dac_dev = DEVICE_DT_GET(DAC_NODE);
 const struct device *dacdma;
@@ -33,11 +34,11 @@ void * dmadaccall(const struct device *dev, void *user_data, uint32_t channel, i
     }
 }
 
-int dacout_init(uint32_t *buffer, uint16_t size){
+int dacout_init(uint16_t *buffer, uint16_t size){
     int ret = 0;
-
+    htim2.Init.Period = 200-1;
     dacout_timer_init();
-
+    tabsize = size;
     // DAC initialization block 
     static const struct dac_channel_cfg dac_ch_cfg = {
 	    .channel_id  = DAC_CHANNEL_ID,
@@ -95,8 +96,6 @@ int dacout_init(uint32_t *buffer, uint16_t size){
     if(ret != 0){
         LOG_ERR("DMA start Error");
     } 
-
-    HAL_TIM_Base_Start(&htim2);
     return ret;
 }
 
@@ -108,9 +107,8 @@ void dacout_timer_init(void)
     TIM_MasterConfigTypeDef sMasterConfig = {0};
 
     htim2.Instance = TIM2;
-    htim2.Init.Prescaler = 84-1;
+    htim2.Init.Prescaler = 90-1;
     htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim2.Init.Period = 20000-1;
     htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
     if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -128,4 +126,26 @@ void dacout_timer_init(void)
     {
        LOG_ERR("HAL_TIMEx_MasterConfigSynchronization Error");
     }
+     HAL_TIM_Base_Start(&htim2);
+}
+
+int pow10(int n){
+    static int pow10[5]={1, 10 ,100 ,1000 ,10000};
+    return pow10[n];
+}
+
+void dacout_change_freq(int freq){
+    char *freqin;
+    int inputfreq=0;
+    freq=0;
+    freqin = console_getline();
+    inputfreq = atoi(freqin);
+    /*
+    for(int i = 1; i <= sizeof(freqin); i++){
+        inputfreq += ((uint8_t)freqin[i-1]-48)*pow10(i);
+    }*/
+    LOG_INF("Caught %d", inputfreq);
+
+    htim2.Init.Period =(1000000/(inputfreq*tabsize)-1);
+    dacout_timer_init();
 }

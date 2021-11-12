@@ -18,6 +18,7 @@
 void wave_aquire(void);
 void wave_draw(void);
 void synesthete_init(void);
+void getfreq(void);
 void sound(void);
 
 #endif

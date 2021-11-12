@@ -12,6 +12,7 @@
 typedef struct xyPos{
     int x;
     int y;
+    int rawy;
 }xyPos;
 
 void touch_init();

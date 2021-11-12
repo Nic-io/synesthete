@@ -16,7 +16,7 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 #define STACK_SIZE 1024
 #define GUI_PRIO 6
-#define TABLE_PRIO 5
+#define TABLE_PRIO 1
 #define SOUND_PRIO 2
 
 K_THREAD_STACK_DEFINE(gui_stack_area, STACK_SIZE);
@@ -36,22 +36,21 @@ void gui_thread(void *p1, void *p2, void *p3){
 
 void update_table(void *p1, void *p2, void *p3){
 	while (1){
-		touch_read();
 		wave_aquire();
-		k_sleep(K_USEC(100));
+		k_sleep(K_USEC(1));
 	}
 }
 
 void produceSound(void *p1, void *p2, void *p3){
 	while (1){
-		//sound();
+		getfreq();
 		k_sleep(K_USEC(10));
 	}
 }
 
 void main(void)
 {
-	console_init();
+	console_getline_init();
 	synesthete_init();
 
 	struct k_thread guiThread;
