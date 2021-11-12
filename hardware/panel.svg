@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="121.93147"
-     inkscape:cy="279.72958"
+     inkscape:cx="187.6924"
+     inkscape:cy="254.27374"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,13 +55,6 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-147)">
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#000002;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect870"
-       width="113.00156"
-       height="140.87776"
-       x="4.864305"
-       y="152.19337" />
     <rect
        id="rect4554"
        width="101.27469"
@@ -218,7 +211,9 @@
        xml:space="preserve"
        id="flowRoot4644"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:FreeMono;-inkscape-font-specification:FreeMono;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,10,-13.000003)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,10,-13.000003)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><flowRegion
          id="flowRegion4646"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:FreeMono;-inkscape-font-specification:FreeMono"><rect
            id="rect4648"
@@ -231,7 +226,9 @@
        xml:space="preserve"
        id="flowRoot4666"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:FreeMono;-inkscape-font-specification:FreeMono;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,10,-13.000003)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,10,-13.000003)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><flowRegion
          id="flowRegion4668"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:FreeMono;-inkscape-font-specification:FreeMono"><rect
            id="rect4670"
@@ -322,7 +319,9 @@
        xml:space="preserve"
        id="flowRoot4742"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:FreeMono;-inkscape-font-specification:FreeMono;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="translate(10,-10.000003)"><flowRegion
+       transform="translate(10,-10.000003)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><flowRegion
          id="flowRegion4744"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:FreeMono;-inkscape-font-specification:FreeMono"><rect
            id="rect4746"
@@ -335,7 +334,9 @@
        xml:space="preserve"
        id="flowRoot4750"
        style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,10,-13.000003)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,10,-13.000003)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><flowRegion
          id="flowRegion4752"><rect
            id="rect4754"
            width="33.941124"
