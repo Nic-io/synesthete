@@ -1,0 +1,31 @@
+diff --git a/drivers/dac/dac_stm32.c b/drivers/dac/dac_stm32.c
+index 0e92b8feda..b36fd828d0 100644
+--- a/drivers/dac/dac_stm32.c
++++ b/drivers/dac/dac_stm32.c
+@@ -101,12 +101,25 @@ static int dac_stm32_channel_setup(const struct device *dev,
+ 		LOG_ERR("Resolution not supported");
+ 		return -ENOTSUP;
+ 	}
++	LL_DAC_SetTriggerSource(cfg->base,
++		table_channels[channel_cfg->channel_id - STM32_FIRST_CHANNEL],
++		LL_DAC_TRIG_EXT_TIM2_TRGO);
++
++	LL_DAC_EnableTrigger(cfg->base,
++		table_channels[channel_cfg->channel_id - STM32_FIRST_CHANNEL]);
++
++	LL_DAC_EnableDMAReq(cfg->base,
++		table_channels[channel_cfg->channel_id - STM32_FIRST_CHANNEL]);
+ 
+ 	/* enable output buffer by default */
+ 	LL_DAC_SetOutputBuffer(cfg->base,
+ 		table_channels[channel_cfg->channel_id - STM32_FIRST_CHANNEL],
+ 		LL_DAC_OUTPUT_BUFFER_ENABLE);
+-
++    
++	LOG_DBG("ADDRESS IS %d" ,LL_DAC_DMA_GetRegAddr(cfg->base,
++		table_channels[channel_cfg->channel_id - STM32_FIRST_CHANNEL],
++		LL_DAC_DMA_REG_DATA_12BITS_RIGHT_ALIGNED));
++	
+ 	LL_DAC_Enable(cfg->base,
+ 		table_channels[channel_cfg->channel_id - STM32_FIRST_CHANNEL]);
+ 
