@@ -12,6 +12,10 @@ a touch screen.
 For a quick start you can use the pre made devcontainer by running
 the script here : https://github.com/Nic-io/vittles
 
+## Build
+
+Run ```west build -b nucleo_f446re -- -DSHIELD=adafruit_2_8_tft_touch_v2```
+
 ## Hardware
 SVG Panel :
 

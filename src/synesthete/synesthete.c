@@ -19,7 +19,7 @@ static int updated_samples[TABLE_RESOLUTION] = {0} ;
 void wave_aquire(void){
     touch_read();
     xyPos newWave = touch_get();
-    if(newWave.x > 0){
+    if(newWave.x > 0 && newWave.rawy !=0 ){
 
         int place;
         k_msleep(5);
