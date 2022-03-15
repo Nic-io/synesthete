@@ -10,6 +10,7 @@ target_include_directories(app
     PRIVATE
         src/gui
         src/ux/touch
+        src/ux/pots
         src/adc
         src/gpio
         src/synesthete
@@ -26,6 +27,8 @@ target_sources(app
         src/dacout/dacout.h
         src/ux/touch/touch.c
         src/ux/touch/touch.h
+        src/ux/pots/pots.c
+        src/ux/pots/pots.h
         src/gpio/gpio.c
         src/gpio/gpio.h
         src/adc/adc.c
