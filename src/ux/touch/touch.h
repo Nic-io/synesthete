@@ -9,11 +9,11 @@
 #include "adc.h"
 #include "gpio.h"
 
-typedef struct xyPos{
-    int x;
-    int y;
-    int rawy;
-}xyPos;
+typedef struct xyPos {
+	int x;
+	int y;
+	int rawy;
+} xyPos;
 
 void touch_init();
 void touch_read();

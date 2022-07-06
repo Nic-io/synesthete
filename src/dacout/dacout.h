@@ -19,5 +19,4 @@ int dacout_init(uint16_t *buffer, uint16_t size);
 void dacout_timer_init(void);
 void dacout_change_freq(int freq);
 
-
 #endif
